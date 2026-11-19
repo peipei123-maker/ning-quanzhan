@@ -130,3 +130,263 @@ body {
   font-size: 12.5px;
   color: #7d8fb0;
 }
+
+/* ---------- 子页面导航 ---------- */
+.buning_202_nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(125, 211, 252, .12);
+}
+.buning_202_nav a {
+  font-size: 14px;
+  color: #9fb0d0;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 8px;
+  transition: all .18s ease;
+}
+.buning_202_nav a:hover { color: #7dd3fc; background: rgba(125, 211, 252, .1); }
+.buning_202_nav a.buning_202_active { color: #7dd3fc; background: rgba(125, 211, 252, .14); }
+
+/* ---------- 表单 ---------- */
+.buning_202_form {
+  max-width: 480px;
+  padding: 28px;
+  border-radius: 16px;
+  background: rgba(23, 34, 58, .72);
+  border: 1px solid rgba(125, 211, 252, .18);
+}
+.buning_202_form label {
+  display: block;
+  font-size: 13.5px;
+  color: #a8b8d8;
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+.buning_202_form input, .buning_202_form select {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #e8eefc;
+  background: #060d1b;
+  border: 1px solid rgba(125, 211, 252, .22);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color .18s ease;
+}
+.buning_202_form input:focus, .buning_202_form select:focus {
+  border-color: #7dd3fc;
+}
+.buning_202_form button {
+  margin-top: 20px;
+  padding: 11px 22px;
+  font-size: 14px;
+  color: #0b1220;
+  background: linear-gradient(90deg, #7dd3fc, #a78bfa);
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+.buning_202_form button:hover { filter: brightness(1.08); }
+
+/* ---------- 状态提示 ---------- */
+.buning_202_status {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  display: none;
+}
+.buning_202_status.buning_202_ok {
+  display: block;
+  background: rgba(34, 197, 94, .12);
+  border: 1px solid rgba(34, 197, 94, .4);
+  color: #86efac;
+}
+.buning_202_status.buning_202_err {
+  display: block;
+  background: rgba(239, 68, 68, .12);
+  border: 1px solid rgba(239, 68, 68, .4);
+  color: #fca5a5;
+}
+.buning_202_status pre {
+  font-family: Consolas, monospace;
+  font-size: 12px;
+  margin-top: 8px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* ---------- 新闻列表 ---------- */
+.buning_202_news_item {
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  border-radius: 14px;
+  background: rgba(23, 34, 58, .72);
+  border: 1px solid rgba(125, 211, 252, .18);
+  transition: transform .18s ease, border-color .18s ease;
+}
+.buning_202_news_item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(125, 211, 252, .5);
+}
+.buning_202_news_item h3 {
+  font-size: 17px;
+  color: #cfe3ff;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.buning_202_news_item p {
+  font-size: 13.5px;
+  color: #93a6c8;
+  line-height: 1.7;
+}
+.buning_202_news_meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 10px;
+  font-size: 12.5px;
+  color: #6b7fa4;
+}
+.buning_202_news_meta span.buning_202_cat {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(125, 211, 252, .14);
+  color: #7dd3fc;
+}
+.buning_202_pager {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+.buning_202_pager button {
+  padding: 8px 16px;
+  font-size: 13px;
+  color: #9fb0d0;
+  background: rgba(23, 34, 58, .72);
+  border: 1px solid rgba(125, 211, 252, .22);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+.buning_202_pager button:hover:not(:disabled) {
+  border-color: #7dd3fc;
+  color: #7dd3fc;
+}
+.buning_202_pager button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+.buning_202_pager .buning_202_page_info {
+  font-size: 13px;
+  color: #7d8fb0;
+  align-self: center;
+}
+
+/* ---------- 画廊 ---------- */
+.buning_202_gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+}
+.buning_202_gallery_item {
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(23, 34, 58, .72);
+  border: 1px solid rgba(125, 211, 252, .18);
+  transition: transform .18s ease, box-shadow .18s ease;
+  cursor: pointer;
+}
+.buning_202_gallery_item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(12, 24, 48, .55);
+}
+.buning_202_gallery_item img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  background: #060d1b;
+}
+.buning_202_gallery_body {
+  padding: 14px 16px 16px;
+}
+.buning_202_gallery_body h3 {
+  font-size: 15px;
+  color: #cfe3ff;
+  margin-bottom: 6px;
+}
+.buning_202_gallery_body p {
+  font-size: 13px;
+  color: #93a6c8;
+  line-height: 1.6;
+}
+.buning_202_gallery_foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 12.5px;
+  color: #6b7fa4;
+}
+.buning_202_gallery_foot .buning_202_tag { margin-top: 0; }
+.buning_202_gallery_foot .buning_202_like {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(239, 68, 68, .1);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, .25);
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.buning_202_gallery_foot .buning_202_like:hover {
+  background: rgba(239, 68, 68, .2);
+  color: #fda4af;
+}
+.buning_202_gallery_foot .buning_202_like.buning_202_liked {
+  background: rgba(239, 68, 68, .25);
+  color: #fecaca;
+}
+.buning_202_tag_filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.buning_202_tag_filter button {
+  padding: 6px 14px;
+  font-size: 13px;
+  color: #9fb0d0;
+  background: rgba(23, 34, 58, .72);
+  border: 1px solid rgba(125, 211, 252, .22);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+.buning_202_tag_filter button:hover { border-color: #7dd3fc; color: #7dd3fc; }
+.buning_202_tag_filter button.buning_202_active {
+  background: rgba(125, 211, 252, .18);
+  border-color: #7dd3fc;
+  color: #7dd3fc;
+}
+
+/* ---------- 加载/空状态 ---------- */
+.buning_202_loading, .buning_202_empty {
+  text-align: center;
+  padding: 40px;
+  color: #6b7fa4;
+  font-size: 14px;
+}
+.buning_202_error {
+  text-align: center;
+  padding: 40px;
+  color: #fca5a5;
+  font-size: 14px;
+}
