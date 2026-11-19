@@ -20,27 +20,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '..', 'frontend')));
 
 /** 健康检查 */
-app.get('/api/buning_health', async (req, res) => {
+app.get('/api/buning_202_health', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT 1 AS ok');
     res.json({ code: 0, msg: '服务与数据库正常', data: { db: rows[0].ok === 1 } });
   } catch (e) {
-    console.error('[buning_health]', e.message);
+    console.error('[buning_202_health]', e.message);
     res.json({ code: 500, msg: '数据库连接失败：' + e.message, data: null });
   }
 });
 
 /** 科技新闻列表（分页） */
-app.get('/api/buning_news/list', async (req, res) => {
+app.get('/api/buning_202_news/list', async (req, res) => {
   const page = Math.max(1, parseInt(req.query.page || '1', 10));
   const size = Math.min(50, Math.max(1, parseInt(req.query.size || '10', 10)));
   const offset = (page - 1) * size;
   try {
     const [rows] = await pool.query(
-      'SELECT * FROM buning_news ORDER BY buning_publish_time DESC LIMIT ? OFFSET ?',
+      'SELECT * FROM buning_202_news ORDER BY buning_202_publish_time DESC LIMIT ? OFFSET ?',
       [size, offset]
     );
-    const [[cnt]] = await pool.query('SELECT COUNT(*) AS total FROM buning_news');
+    const [[cnt]] = await pool.query('SELECT COUNT(*) AS total FROM buning_202_news');
     res.json({ code: 0, msg: 'ok', data: { total: cnt.total, page, size, rows } });
   } catch (e) {
     console.error('[news/list]', e.message);
@@ -49,7 +49,7 @@ app.get('/api/buning_news/list', async (req, res) => {
 });
 
 /** 数据库连接测试（给 database.html 用） */
-app.post('/api/buning_db/test', async (req, res) => {
+app.post('/api/buning_202_db/test', async (req, res) => {
   const { user, password } = req.body || {};
   if (!user || !password) {
     return res.json({ code: 400, msg: '请输入用户名和密码', data: null });
@@ -59,7 +59,7 @@ app.post('/api/buning_db/test', async (req, res) => {
       host: process.env.DB_HOST || 'localhost',
       user,
       password,
-      database: process.env.DB_NAME || 'buning_technews'
+      database: process.env.DB_NAME || 'buning_202_technews'
     });
     await conn.end();
     res.json({ code: 0, msg: '数据库连接成功', data: { user } });

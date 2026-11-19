@@ -12,7 +12,7 @@ body {
   overflow-x: hidden;
 }
 
-#buning_canvas {
+#buning_202_canvas {
   position: fixed;
   inset: 0;
   width: 100%;
@@ -21,7 +21,7 @@ body {
   opacity: .55;
 }
 
-.buning_wrap {
+.buning_202_wrap {
   position: relative;
   z-index: 1;
   max-width: 1080px;
@@ -29,9 +29,9 @@ body {
   padding: 56px 24px 40px;
 }
 
-.buning_header { margin-bottom: 34px; }
+.buning_202_header { margin-bottom: 34px; }
 
-.buning_title {
+.buning_202_title {
   font-size: 40px;
   letter-spacing: 2px;
   background: linear-gradient(90deg, #7dd3fc, #a78bfa);
@@ -40,7 +40,7 @@ body {
   color: transparent;
 }
 
-.buning_meta {
+.buning_202_meta {
   display: flex;
   flex-wrap: wrap;
   gap: 10px 22px;
@@ -49,13 +49,13 @@ body {
   color: #9fb0d0;
 }
 
-.buning_cards {
+.buning_202_cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 18px;
 }
 
-.buning_card {
+.buning_202_card {
   display: block;
   padding: 22px 20px;
   border-radius: 16px;
@@ -66,16 +66,16 @@ body {
   transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
 }
 
-.buning_card:hover {
+.buning_202_card:hover {
   transform: translateY(-4px);
   border-color: rgba(125, 211, 252, .55);
   box-shadow: 0 14px 34px rgba(12, 24, 48, .55);
 }
 
-.buning_card h2 { font-size: 19px; margin-bottom: 10px; color: #cfe3ff; }
-.buning_card p { font-size: 13.5px; line-height: 1.7; color: #93a6c8; }
+.buning_202_card h2 { font-size: 19px; margin-bottom: 10px; color: #cfe3ff; }
+.buning_202_card p { font-size: 13.5px; line-height: 1.7; color: #93a6c8; }
 
-.buning_tag {
+.buning_202_tag {
   display: inline-block;
   margin-top: 14px;
   padding: 3px 10px;
@@ -85,7 +85,7 @@ body {
   color: #7dd3fc;
 }
 
-.buning_api {
+.buning_202_api {
   margin-top: 30px;
   padding: 22px 20px;
   border-radius: 16px;
@@ -93,10 +93,10 @@ body {
   border: 1px solid rgba(125, 211, 252, .14);
 }
 
-.buning_api h2 { font-size: 18px; margin-bottom: 8px; }
-.buning_hint { font-size: 13px; color: #8fa2c4; margin-bottom: 12px; }
+.buning_202_api h2 { font-size: 18px; margin-bottom: 8px; }
+.buning_202_hint { font-size: 13px; color: #8fa2c4; margin-bottom: 12px; }
 
-#buning_api_out {
+#buning_202_api_out {
   font-family: Consolas, "Courier New", monospace;
   font-size: 13px;
   line-height: 1.7;
@@ -108,7 +108,7 @@ body {
   white-space: pre-wrap;
 }
 
-.buning_btn {
+.buning_202_btn {
   margin-top: 14px;
   padding: 10px 18px;
   font-size: 14px;
@@ -119,9 +119,9 @@ body {
   cursor: pointer;
 }
 
-.buning_btn:hover { filter: brightness(1.08); }
+.buning_202_btn:hover { filter: brightness(1.08); }
 
-.buning_footer {
+.buning_202_footer {
   display: flex;
   justify-content: space-between;
   margin-top: 40px;

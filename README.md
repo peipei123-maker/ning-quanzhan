@@ -13,7 +13,7 @@ quanzhanxiangmu/
 │   ├── server.js     服务入口，托管 frontend
 │   ├── db.js         MySQL 连接池
 │   ├── .env          数据库凭据（不进 git）
-│   └── buning_interface.md / buning_database.md
+│   └── buning_202_interface.md / buning_202_database.md
 ├── frontend/         原生前端
 │   ├── index.html    首页（导航 + canvas 动画）
 │   ├── css/ js/ images/ fonts/
