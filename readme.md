@@ -33,7 +33,7 @@ quanzhanxiangmu/
 ## 数据库
 
 - MySQL 库名：`buning_202_technews`
-- 主要数据表：`buning_202_news`（科技新闻，已插入 8 条测试数据）
+- 主要数据表：`buning_202_news`（科技新闻，8 条测试数据）、`buning_202_gallery`（图文列表，8 条）
 - 完整建表与 INSERT 语句见 `backend/buning_202_database.md`
 
 ## 接口一览
@@ -43,13 +43,15 @@ quanzhanxiangmu/
 | /api/buning_202_health | GET | 服务与数据库健康检查 |
 | /api/buning_202_news/list | GET | 科技新闻分页列表（page、size） |
 | /api/buning_202_db/test | POST | 数据库连通性测试（database.html 使用） |
+| /api/buning_202_gallery/list | GET | 图文列表（size、tag 可选） |
+| /api/buning_202_gallery/like/:id | POST | 图文点赞（浏览量 +1） |
 
-## 页面清单
+## 页面清单（全部已完成）
 
-- `frontend/index.html` 首页（已完成）
-- `frontend/database.html` 数据库连接测试（待完成）
-- `frontend/news.html` 科技新闻列表（待完成）
-- `frontend/gallery.html` 图文列表（待完成）
+- `frontend/index.html` 首页：姓名学号、导航卡片、canvas 粒子动画、接口自检
+- `frontend/database.html` 数据库连接测试：输入用户名密码，成功/失败均有提示
+- `frontend/news.html` 科技新闻列表：读取 `buning_202_news`，显示接口链接与内容
+- `frontend/gallery.html` 图文列表：读取 `buning_202_gallery`，支持标签筛选与点赞
 
 ## 启动方式
 
