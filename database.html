@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+  姓名：卜宁 | 学号：24001010202 | 时间：2026-11-19 | 大模型：DeepSeek
+  数据库连接测试页
+-->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>数据库连接测试 · 科技资讯平台</title>
+  <link rel="stylesheet" href="./css/buning_202_main.css" />
+</head>
+<body>
+  <canvas id="buning_202_canvas"></canvas>
+
+  <main class="buning_202_wrap">
+    <header class="buning_202_header">
+      <h1 class="buning_202_title">数据库连接测试</h1>
+      <p class="buning_202_meta">
+        <span>姓名：卜宁</span>
+        <span>学号：24001010202</span>
+        <span>接口：POST /api/buning_202_db/test</span>
+      </p>
+    </header>
+
+    <nav class="buning_202_nav">
+      <a href="./index.html">← 返回首页</a>
+      <a href="./database.html" class="buning_202_active">数据库测试</a>
+      <a href="./news.html">科技新闻</a>
+      <a href="./gallery.html">图文画廊</a>
+    </nav>
+
+    <form class="buning_202_form" id="buning_202_db_form">
+      <label>数据库主机</label>
+      <input type="text" id="buning_202_db_host" value="localhost" />
+
+      <label>数据库用户名</label>
+      <input type="text" id="buning_202_db_user" value="root" />
+
+      <label>数据库密码</label>
+      <input type="password" id="buning_202_db_password" value="root" />
+
+      <button type="submit" id="buning_202_db_submit">测试连接</button>
+
+      <div class="buning_202_status" id="buning_202_db_status"></div>
+    </form>
+
+    <footer class="buning_202_footer">
+      <span>卜宁 · 24001010202 · 全栈开发课程项目</span>
+      <span>端口 8325</span>
+    </footer>
+  </main>
+
+  <script src="./js/buning_202_main.js"></script>
+  <script src="./js/buning_202_database.js"></script>
+</body>
+</html>

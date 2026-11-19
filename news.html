@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+  姓名：卜宁 | 学号：24001010202 | 时间：2026-11-19 | 大模型：DeepSeek
+  科技新闻列表页
+-->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>科技新闻列表 · 科技资讯平台</title>
+  <link rel="stylesheet" href="./css/buning_202_main.css" />
+</head>
+<body>
+  <canvas id="buning_202_canvas"></canvas>
+
+  <main class="buning_202_wrap">
+    <header class="buning_202_header">
+      <h1 class="buning_202_title">科技新闻列表</h1>
+      <p class="buning_202_meta">
+        <span>姓名：卜宁</span>
+        <span>学号：24001010202</span>
+        <span>接口：GET /api/buning_202_news/list</span>
+      </p>
+    </header>
+
+    <nav class="buning_202_nav">
+      <a href="./index.html">← 返回首页</a>
+      <a href="./database.html">数据库测试</a>
+      <a href="./news.html" class="buning_202_active">科技新闻</a>
+      <a href="./gallery.html">图文画廊</a>
+    </nav>
+
+    <div id="buning_202_news_list"></div>
+    <div class="buning_202_pager" id="buning_202_news_pager"></div>
+
+    <footer class="buning_202_footer">
+      <span>卜宁 · 24001010202 · 全栈开发课程项目</span>
+      <span>端口 8325</span>
+    </footer>
+  </main>
+
+  <script src="./js/buning_202_main.js"></script>
+  <script src="./js/buning_202_news.js"></script>
+</body>
+</html>
