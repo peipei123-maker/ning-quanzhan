@@ -9,6 +9,7 @@
   var input = document.getElementById('buning_202_chat_input');
   var sendBtn = document.getElementById('buning_202_chat_send');
   var tip = document.getElementById('buning_202_chat_tip');
+  var API = window.__BN_API__ || '/api/buning_202_chat';
 
   function addMsg(text, role) {
     var wrap = document.createElement('div');
@@ -33,7 +34,7 @@
     tip.textContent = '正在请求大模型…';
     var pending = addMsg('思考中…', 'ai');
 
-    fetch('/api/buning_202_chat', {
+    fetch(API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: text })
@@ -63,6 +64,16 @@
         input.focus();
       });
   });
+
+  var quick = document.getElementById('buning_202_quick');
+  if (quick) {
+    Array.prototype.forEach.call(quick.querySelectorAll('button'), function (b) {
+      b.addEventListener('click', function () {
+        input.value = b.textContent;
+        form.dispatchEvent(new Event('submit', { cancelable: true }));
+      });
+    });
+  }
 
   input.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && !e.shiftKey) {

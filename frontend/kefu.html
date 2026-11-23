@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+  姓名：卜宁 | 学号：24001010202 | 时间：2026-11-23 | 大模型：qiniu/conatus-free（七牛）
+  在线客服页面（LLM 设计作业 第二部分）
+-->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>在线客服 · 卜宁 24001010202</title>
+  <link rel="stylesheet" href="./css/buning_202_chat.css" />
+</head>
+<body>
+  <main class="buning_202_chat_wrap">
+    <header class="buning_202_chat_head">
+      <h1>在线客服</h1>
+      <p class="buning_202_chat_sub">
+        模型：<code>qiniu/conatus-free</code> · BaseURL：<code>https://api.qnaigc.com/v1</code> · 接口：<code>POST /api/buning_202_service</code>
+      </p>
+      <a class="buning_202_chat_back" href="./index.html">← 返回首页</a>
+    </header>
+
+    <section class="buning_202_chat_body" id="buning_202_chat_body">
+      <div class="buning_202_msg buning_202_msg_ai">
+        <div class="buning_202_bubble">您好，这里是科技资讯平台客服。请问是订单、账号还是内容问题？</div>
+      </div>
+    </section>
+
+    <div class="buning_202_quick" id="buning_202_quick">
+      <button type="button">怎么修改绑定的手机号？</button>
+      <button type="button">文章打不开怎么办？</button>
+      <button type="button">会员怎么取消自动续费？</button>
+    </div>
+
+    <form class="buning_202_chat_form" id="buning_202_chat_form">
+      <textarea id="buning_202_chat_input" rows="2" placeholder="描述你的问题，Enter 发送，Shift+Enter 换行"></textarea>
+      <button type="submit" id="buning_202_chat_send">发送</button>
+    </form>
+    <p class="buning_202_chat_tip" id="buning_202_chat_tip">收发数据会打印在后端控制台（作业要求）</p>
+  </main>
+  <script>window.__BN_API__ = '/api/buning_202_service';</script>
+  <script src="./js/buning_202_chat.js"></script>
+</body>
+</html>

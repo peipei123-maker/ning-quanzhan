@@ -176,6 +176,77 @@ app.post('/api/buning_202_chat', async (req, res) => {
   }
 });
 
+/**
+ * 在线客服：调用七牛 AI 推理（LLM 设计作业第二部分）
+ * 作业要求：在控制台输出「发送给大模型的数据」和「从大模型接收到的数据」
+ */
+app.post('/api/buning_202_service', async (req, res) => {
+  const message = (req.body && req.body.message ? String(req.body.message) : '').trim();
+  if (!message) {
+    return res.json({ code: 400, msg: '请输入咨询内容', data: null });
+  }
+
+  const body = {
+    model: process.env.QINIU_MODEL || 'qiniu/conatus-free',
+    messages: [
+      { role: 'system', content: '你是科技资讯平台的在线客服，语气礼貌、回答简洁，遇到退款、账号、订单问题给出处理步骤，超出范围时引导用户留言。' },
+      { role: 'user', content: message }
+    ],
+    max_tokens: 800
+  };
+
+  console.log('===== [客服·发给大模型] =====');
+  console.log(JSON.stringify(body, null, 2));
+
+  const url = (process.env.QINIU_BASE_URL || 'https://api.qnaigc.com/v1') + '/chat/completions';
+  const MAX_TRY = 4;
+  let lastMsg = '';
+
+  // 七牛免费池会有 "Too many requests / identity verification" 的偶发失败，做重试
+  for (let attempt = 1; attempt <= MAX_TRY; attempt++) {
+    try {
+      const r = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + (process.env.QINIU_API_KEY || '')
+        },
+        body: JSON.stringify(body)
+      });
+      const raw = await r.text();
+
+      console.log('===== [客服·大模型返回] 第 ' + attempt + ' 次 =====');
+      console.log(raw);
+
+      if (r.ok) {
+        const json = JSON.parse(raw);
+        const answer = (json.choices && json.choices[0] && json.choices[0].message)
+          ? json.choices[0].message.content : '';
+        if (answer) {
+          return res.json({ code: 0, msg: 'ok', data: { answer, model: json.model || body.model, usage: json.usage || null, attempt } });
+        }
+        // 空回答（免费模型偶尔只返回 reasoning），重试
+        lastMsg = '模型返回空内容';
+      } else {
+        lastMsg = raw.slice(0, 240);
+        // 非限流类错误直接返回
+        if (r.status === 400 || r.status === 401 || r.status === 404) {
+          return res.json({ code: r.status, msg: '七牛接口返回错误：' + lastMsg, data: null });
+        }
+      }
+    } catch (e) {
+      lastMsg = e.message;
+      console.error('[service] 第 ' + attempt + ' 次请求异常：', e.message);
+    }
+    if (attempt < MAX_TRY) {
+      await new Promise((r2) => setTimeout(r2, attempt * 1500));
+    }
+  }
+
+  console.error('[service] 重试 ' + MAX_TRY + ' 次仍失败：', lastMsg);
+  res.json({ code: 429, msg: '七牛免费模型繁忙（已自动重试 ' + MAX_TRY + ' 次），请稍后再发一次。详情：' + lastMsg, data: null });
+});
+
 app.listen(PORT, () => {
   console.log('==============================================');
   console.log(' 科技资讯平台 服务已启动');
