@@ -148,7 +148,7 @@ app.post('/api/buning_202_chat', async (req, res) => {
   };
 
   // ===== 作业要求：打印发送给大模型的数据 =====
-  console.log('===== [发给大模型] =====');
+  console.log('===== 【发给大模型】 =====');
   console.log(JSON.stringify(body, null, 2));
 
   try {
@@ -164,7 +164,7 @@ app.post('/api/buning_202_chat', async (req, res) => {
     const raw = await r.text();
 
     // ===== 作业要求：打印从大模型接收到的数据 =====
-    console.log('===== [大模型返回] =====');
+    console.log('===== 【模型返回】 =====');
     console.log(raw);
 
     if (!r.ok) {
@@ -208,7 +208,7 @@ app.post('/api/buning_202_service', async (req, res) => {
     max_tokens: 800
   };
 
-  console.log('===== [客服·发给大模型] =====');
+  console.log('===== 【发给大模型】客服 =====');
   console.log(JSON.stringify(body, null, 2));
 
   const url = (process.env.QINIU_BASE_URL || 'https://api.qnaigc.com/v1') + '/chat/completions';
@@ -228,7 +228,7 @@ app.post('/api/buning_202_service', async (req, res) => {
       });
       const raw = await r.text();
 
-      console.log('===== [客服·大模型返回] 第 ' + attempt + ' 次 =====');
+      console.log('===== 【模型返回】客服 第 ' + attempt + ' 次 =====');
       console.log(raw);
 
       if (r.ok) {
@@ -408,7 +408,7 @@ app.post('/api/buning_202_kb/ask', async (req, res) => {
       max_tokens: 900
     };
 
-    console.log('===== [知识库问答·发给大模型] =====');
+    console.log('===== 【发给大模型】知识库问答 =====');
     console.log(JSON.stringify({ model: body.model, question, hits: top.map(t => ({ kb: t.chunk.kbName, seq: t.chunk.seq, score: Number(t.score.toFixed(4)) })) }, null, 2));
     console.log('--- 提示词中的资料片段（前 500 字）---');
     console.log(context.slice(0, 500));
@@ -420,7 +420,7 @@ app.post('/api/buning_202_kb/ask', async (req, res) => {
       body: JSON.stringify(body)
     });
     const raw = await r.text();
-    console.log('===== [知识库问答·大模型返回] =====');
+    console.log('===== 【模型返回】知识库问答 =====');
     console.log(raw);
 
     if (!r.ok) return res.json({ code: r.status, msg: '大模型返回错误：' + raw.slice(0, 200), data: null });
@@ -438,6 +438,37 @@ app.post('/api/buning_202_kb/ask', async (req, res) => {
   } catch (e) {
     console.error('[kb ask]', e.message);
     res.json({ code: 500, msg: '问答失败：' + e.message, data: null });
+  }
+});
+
+/** 数据库表总览（作业截图用） */
+app.get('/api/buning_202_db/tables', async (req, res) => {
+  try {
+    const [tables] = await pool.query(
+      "SELECT table_name AS name, table_rows AS rowCount FROM information_schema.tables WHERE table_schema = DATABASE() ORDER BY table_name"
+    );
+    const detail = [];
+    for (const t of tables) {
+      const [[cnt]] = await pool.query('SELECT COUNT(*) AS c FROM `' + t.name + '`');
+      detail.push({ name: t.name, rowCount: cnt.c });
+    }
+    res.json({ code: 0, msg: 'ok', data: { database: process.env.DB_NAME, tables: detail } });
+  } catch (e) {
+    res.json({ code: 500, msg: '查询失败：' + e.message, data: null });
+  }
+});
+
+/** 某张表的前 N 行（作业截图用） */
+app.get('/api/buning_202_db/rows/:table', async (req, res) => {
+  const allowed = ['buning_202_news', 'buning_202_gallery', 'buning_202_kb', 'buning_202_kb_chunk'];
+  const t = req.params.table;
+  if (allowed.indexOf(t) < 0) return res.json({ code: 400, msg: '不允许查看该表', data: null });
+  const n = Math.min(parseInt(req.query.limit, 10) || 10, 50);
+  try {
+    const [rows] = await pool.query('SELECT * FROM `' + t + '` LIMIT ' + n);
+    res.json({ code: 0, msg: 'ok', data: { table: t, count: rows.length, rows } });
+  } catch (e) {
+    res.json({ code: 500, msg: '查询失败：' + e.message, data: null });
   }
 });
 
