@@ -57,3 +57,14 @@ quanzhanxiangmu/
 
 1. 双击根目录 `qidong.bat`（首次会自动 `npm i` 装依赖）
 2. 浏览器访问 http://localhost:8325
+
+## 在 Trae（或 VSCode）里启动
+
+1. Trae 菜单 **文件 → 打开文件夹**，选 `D:\quanzhanxiangmu`
+2. **首次**：终端里执行 `cd backend` → `npm i`（本项目已装过，可跳过）
+3. 按 **F5**（或左侧「运行和调试」→ 选择「启动后端（8325）」→ 点绿色三角）
+4. 底部终端出现「服务已启动 / http://localhost:8325」即成功
+5. 浏览器打开 http://localhost:8325 （AI 聊天 `/chat.html`，在线客服 `/kefu.html`）
+
+> 也可以不打开 Trae，直接双击根目录 `qidong.bat` 启动。
+> 若提示 `EADDRINUSE`，说明 8325 已被占用，先关掉旧的终端窗口或重启电脑。

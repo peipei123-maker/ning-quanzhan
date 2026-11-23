@@ -9,3 +9,7 @@
 | /api/buning_202_gallery/like/:id | POST | 路径参数 id（画廊记录主键） | 成功 `{"code":0,"msg":"ok","data":{"affected":1}}`；失败 `{"code":500,"msg":"...","data":null}` | 2026-11-19 |
 | /api/buning_202_chat | POST | `{"message":"你好"}` | 成功 `{"code":0,"msg":"ok","data":{"answer":"...","model":"deepseek-ai/DeepSeek-V4-Flash","usage":{...}}}`；失败 `{"code":500,"msg":"请求大模型失败：...","data":null}` | 2026-11-23 |
 | /api/buning_202_service | POST | `{"message":"怎么修改手机号"}` | 成功 `{"code":0,"msg":"ok","data":{"answer":"...","model":"qiniu/conatus-free","usage":{...}}}`；失败 `{"code":500,"msg":"七牛接口返回错误：...","data":null}` | 2026-11-23 |
+| /api/buning_202_kb/upload | POST | multipart：file（必填）、kbName（可选） | `{"code":0,"msg":"ok","data":{"id":1,"name":"...","filename":"...","chunkCount":12,"textLen":4210,"embedded":true}}` | 2026-11-23 |
+| /api/buning_202_kb/list | GET | 无 | `{"code":0,"msg":"ok","data":[{"buning_202_id":1,"buning_202_name":"...","buning_202_chunk_count":12}]}` | 2026-11-23 |
+| /api/buning_202_kb/:id | DELETE | 路径参数 id | `{"code":0,"msg":"ok","data":{"id":1}}` | 2026-11-23 |
+| /api/buning_202_kb/ask | POST | `{"message":"问题","kbId":1}` | `{"code":0,"msg":"ok","data":{"answer":"...","sources":[{"kb":"...","seq":3,"score":0.82}]}}` | 2026-11-23 |

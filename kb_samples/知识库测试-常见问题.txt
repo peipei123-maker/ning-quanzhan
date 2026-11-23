@@ -1,0 +1,14 @@
+科技资讯平台 常见问题（TXT 版知识库示例）
+编制：卜宁 24001010202
+
+问：平台默认端口是多少？
+答：后端默认监听 8325 端口，接口前缀为 /api/。
+
+问：数据库叫什么？
+答：数据库名 buning_202_technews，包含 buning_202_news、buning_202_gallery、buning_202_kb、buning_202_kb_chunk 等表。
+
+问：AI 聊天用的是哪个模型？
+答：硅基流动的 deepseek-ai/DeepSeek-V4-Flash。
+
+问：在线客服用的哪个模型？
+答：七牛的 qiniu/conatus-free，BaseURL 为 https://api.qnaigc.com/v1。

@@ -6,3 +6,4 @@
 | 2026-11-19 | 按 AGENTS.md 规则继续做三个页面：database.html、news.html、gallery.html | DeepSeek |
 | 2026-11-23 | 创建AI聊天页面（硅基流动 deepseek-ai/DeepSeek-V4-Flash），后端转发并在控制台输出发送/接收数据 | DeepSeek-V4-Flash |
 | 2026-11-23 | 使用七牛 api-key 完成在线客服（qiniu/conatus-free，BaseURL api.qnaigc.com/v1），控制台输出收发数据 | DeepSeek-V4-Flash |
+| 2026-11-23 | 完成知识库文件上传功能：支持 doc/docx/ppt/pptx/pdf/txt 上传与解析，分块后用 bge-m3 向量化，基于知识库问答并在控制台输出收发数据 | DeepSeek-V4-Flash |

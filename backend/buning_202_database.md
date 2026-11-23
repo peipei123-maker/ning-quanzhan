@@ -61,3 +61,26 @@ INSERT INTO buning_202_gallery (buning_202_title, buning_202_desc, buning_202_im
 ('机器人实验室', '波士顿动力的人形机器人 Atlas 在实验室中完成后空翻动作。', 'https://picsum.photos/seed/robot/600/400', '科技', 2890),
 ('宇航员的地球', '国际空间站视角下的蓝色星球，云层与陆地清晰可见。', 'https://picsum.photos/seed/earth/600/400', '航天', 4532);
 ```
+
+## 3. 知识库（RAG）
+```sql
+CREATE TABLE IF NOT EXISTS buning_202_kb (
+  buning_202_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  buning_202_name VARCHAR(120) NOT NULL,
+  buning_202_filename VARCHAR(200) NOT NULL,
+  buning_202_ext VARCHAR(16) NOT NULL,
+  buning_202_size INT UNSIGNED DEFAULT 0,
+  buning_202_chunk_count INT UNSIGNED DEFAULT 0,
+  buning_202_text_len INT UNSIGNED DEFAULT 0,
+  buning_202_created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS buning_202_kb_chunk (
+  buning_202_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  buning_202_kb_id INT UNSIGNED NOT NULL,
+  buning_202_seq INT UNSIGNED NOT NULL,
+  buning_202_content TEXT NOT NULL,
+  buning_202_embedding LONGTEXT,
+  KEY idx_kb (buning_202_kb_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
