@@ -132,12 +132,18 @@ app.post('/api/buning_202_chat', async (req, res) => {
     return res.json({ code: 400, msg: '请输入内容', data: null });
   }
 
+  // 支持多轮上下文：前端传来的 history 是 [{role,content}, ...]
+  const history = Array.isArray(req.body.history)
+    ? req.body.history
+        .filter(function (m) { return m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string'; })
+        .slice(-12)
+    : [];
+
   const body = {
     model: process.env.SILICONFLOW_MODEL || 'deepseek-ai/DeepSeek-V4-Flash',
-    messages: [
-      { role: 'system', content: '你是科技资讯平台的智能助手，回答简洁、准确、中文优先。' },
-      { role: 'user', content: message }
-    ],
+    messages: [{ role: 'system', content: '你是科技资讯平台的智能助手，回答简洁、准确、中文优先，能记住上文。' }]
+      .concat(history)
+      .concat([{ role: 'user', content: message }]),
     max_tokens: 800
   };
 
