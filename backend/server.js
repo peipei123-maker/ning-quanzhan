@@ -115,6 +115,67 @@ app.post('/api/buning_202_gallery/like/:id', async (req, res) => {
   }
 });
 
+/**
+ * AI 聊天：转发到硅基流动（LLM 设计作业）
+ * 作业要求：在控制台输出「发送给大模型的数据」和「从大模型接收到的数据」
+ */
+app.post('/api/buning_202_chat', async (req, res) => {
+  const message = (req.body && req.body.message ? String(req.body.message) : '').trim();
+  if (!message) {
+    return res.json({ code: 400, msg: '请输入内容', data: null });
+  }
+
+  const body = {
+    model: process.env.SILICONFLOW_MODEL || 'deepseek-ai/DeepSeek-V4-Flash',
+    messages: [
+      { role: 'system', content: '你是科技资讯平台的智能助手，回答简洁、准确、中文优先。' },
+      { role: 'user', content: message }
+    ],
+    max_tokens: 800
+  };
+
+  // ===== 作业要求：打印发送给大模型的数据 =====
+  console.log('===== [发给大模型] =====');
+  console.log(JSON.stringify(body, null, 2));
+
+  try {
+    const url = (process.env.SILICONFLOW_BASE_URL || 'https://api.siliconflow.cn/v1') + '/chat/completions';
+    const r = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + (process.env.SILICONFLOW_API_KEY || '')
+      },
+      body: JSON.stringify(body)
+    });
+    const raw = await r.text();
+
+    // ===== 作业要求：打印从大模型接收到的数据 =====
+    console.log('===== [大模型返回] =====');
+    console.log(raw);
+
+    if (!r.ok) {
+      return res.json({ code: r.status, msg: '大模型接口返回错误：' + raw.slice(0, 200), data: null });
+    }
+
+    const json = JSON.parse(raw);
+    const answer = (json.choices && json.choices[0] && json.choices[0].message)
+      ? json.choices[0].message.content : '';
+    res.json({
+      code: 0,
+      msg: 'ok',
+      data: {
+        answer,
+        model: json.model || body.model,
+        usage: json.usage || null
+      }
+    });
+  } catch (e) {
+    console.error('[chat] 请求失败：', e.message);
+    res.json({ code: 500, msg: '请求大模型失败：' + e.message, data: null });
+  }
+});
+
 app.listen(PORT, () => {
   console.log('==============================================');
   console.log(' 科技资讯平台 服务已启动');

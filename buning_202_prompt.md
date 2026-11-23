@@ -4,3 +4,4 @@
 |---|---|---|
 | 2026-11-19 | 请初始化本项目：git init + .gitignore；按 AGENTS.md 建前后端目录骨架、安装依赖；创建首页 index.html（含姓名学号、项目名、canvas 背景动画、页面导航）；创建 README.md | DeepSeek |
 | 2026-11-19 | 按 AGENTS.md 规则继续做三个页面：database.html、news.html、gallery.html | DeepSeek |
+| 2026-11-23 | 创建AI聊天页面（硅基流动 deepseek-ai/DeepSeek-V4-Flash），后端转发并在控制台输出发送/接收数据 | DeepSeek-V4-Flash |
